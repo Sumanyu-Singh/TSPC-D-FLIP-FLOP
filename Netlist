@@ -1,0 +1,74 @@
+*  Generated for: PrimeSim
+*  Design library name: sumanyu_lib
+*  Design cell name: ss_dff_tb
+*  Design view name: schematic
+.lib 'saed32nm.lib' TT
+.param cout=1a k=50p per_c=1n pwd_c='(0.4*per_c)' t1=5n t2=7n td_c=200p
++ td_d=100p tr_c='(0.1*per_c)' vdd=1.8
+*Custom Compiler Version S-2021.09
+*Tue Mar  1 17:09:55 2022
+
+.global gnd!
+********************************************************************************
+* Library          : sumanyu_lib
+* Cell             : ss_dff
+* View             : schematic
+* View Search List : hspice hspiceD schematic spice veriloga
+* View Stop List   : hspice hspiceD
+********************************************************************************
+.subckt ss_dff clk d q vdd
+xm5 q q_bar gnd! gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm4 q_bar clk net13 gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm3 net13 net40 gnd! gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm2 net40 net27 net11 gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm1 net11 clk gnd! gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm0 net27 d gnd! gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm10 q q_bar vdd vdd p105 w=0.1u l=0.03u nf=1 m=1
+xm9 q_bar net40 vdd vdd p105 w=0.1u l=0.03u nf=1 m=1
+xm8 net40 clk vdd vdd p105 w=0.1u l=0.03u nf=1 m=1
+xm7 net31 d vdd vdd p105 w=0.1u l=0.03u nf=1 m=1
+xm6 net27 clk net31 vdd p105 w=0.1u l=0.03u nf=1 m=1
+.ends ss_dff
+
+********************************************************************************
+* Library          : sumanyu_lib
+* Cell             : ss_dff_tb
+* View             : schematic
+* View Search List : hspice hspiceD schematic spice veriloga
+* View Stop List   : hspice hspiceD
+********************************************************************************
+xi0 c d q vdd ss_dff
+v9 vdd gnd! dc='vdd'
+v2 c gnd! dc=0 pulse ( 0 'vdd' 'td_c' 'tr_c' 'tr_c' 'pwd_c' 'per_c' )
+c7 q gnd! c='cout'
+v3 d gnd! dc=0 pwl ( 0 'vdd' 't1' 'vdd' '(t1+k)' 0 't2' 0 '(t2+k)' 'vdd' td='td_d'
++  )
+
+
+
+
+
+
+
+
+.tran '0.001*(20n-0)' '20n' name=tran
+
+.option primesim_remove_probe_prefix = 0
+.probe v(*) i(*) level=1
+.probe tran v(c) v(d) v(q) i(v9)
+
+.temp 25
+
+
+
+.option primesim_output=wdf
+
+
+.option parhier = LOCAL
+
+
+
+
+
+
+.end
