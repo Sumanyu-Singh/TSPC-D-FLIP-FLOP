@@ -45,12 +45,6 @@ v3 d gnd! dc=0 pwl ( 0 'vdd' 't1' 'vdd' '(t1+k)' 0 't2' 0 '(t2+k)' 'vdd' td='td_
 +  )
 
 
-
-
-
-
-
-
 .tran '0.001*(20n-0)' '20n' name=tran
 
 .option primesim_remove_probe_prefix = 0
@@ -59,16 +53,8 @@ v3 d gnd! dc=0 pwl ( 0 'vdd' 't1' 'vdd' '(t1+k)' 0 't2' 0 '(t2+k)' 'vdd' td='td_
 
 .temp 25
 
-
-
 .option primesim_output=wdf
 
-
 .option parhier = LOCAL
-
-
-
-
-
 
 .end
